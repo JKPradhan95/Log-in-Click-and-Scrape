@@ -1,12 +1,9 @@
-# Author: Ardit Sulce, Automate Everything with Python, Udemy
-# Course URL: https://www.udemy.com/course/automate-everything-with-python/
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
 def get_drvier():
-  # Set options to make browsing easier
   options = webdriver.ChromeOptions()
   options.add_argument("disable-infobars")
   options.add_argument("start-maximized")
@@ -28,17 +25,14 @@ def clean_text(text):
 def main():
   driver = get_drvier()
 
-  # Find and fill in username and password 
   driver.find_element(by="id", value="id_username").send_keys("automated")
   time.sleep(2)
   driver.find_element(by="id", value="id_password").send_keys("automatedautomated" + Keys.RETURN)
   time.sleep(2)
 
-  # Click on Home link and wait 2 sec
   driver.find_element(by="xpath", value="/html/body/nav/div/a").click()
   time.sleep(2)
 
-  # Scrape the temperature value
   text = driver.find_element(by="xpath", value="/html/body/div[1]/div/h1[2]").text
   return clean_text(text)
 
